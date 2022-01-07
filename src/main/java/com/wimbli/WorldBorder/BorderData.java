@@ -295,101 +295,54 @@ public class BorderData
 	static
 	{
 		safeOpenBlocks.add(Material.AIR);
-		safeOpenBlocks.add(Material.CAVE_AIR);
-		safeOpenBlocks.add(Material.OAK_SAPLING);
-		safeOpenBlocks.add(Material.SPRUCE_SAPLING);
-		safeOpenBlocks.add(Material.BIRCH_SAPLING);
-		safeOpenBlocks.add(Material.JUNGLE_SAPLING);
-		safeOpenBlocks.add(Material.ACACIA_SAPLING);
-		safeOpenBlocks.add(Material.DARK_OAK_SAPLING);
+		safeOpenBlocks.add(Material.SAPLING);
 		safeOpenBlocks.add(Material.WATER);
-		safeOpenBlocks.add(Material.RAIL);
+		safeOpenBlocks.add(Material.RAILS);
 		safeOpenBlocks.add(Material.POWERED_RAIL);
 		safeOpenBlocks.add(Material.DETECTOR_RAIL);
 		safeOpenBlocks.add(Material.ACTIVATOR_RAIL);
-		safeOpenBlocks.add(Material.COBWEB);
-		safeOpenBlocks.add(Material.GRASS);
-		safeOpenBlocks.add(Material.FERN);
+		safeOpenBlocks.add(Material.WEB);
+		safeOpenBlocks.add(Material.LONG_GRASS);
 		safeOpenBlocks.add(Material.DEAD_BUSH);
-		safeOpenBlocks.add(Material.DANDELION);
-		safeOpenBlocks.add(Material.POPPY);
-		safeOpenBlocks.add(Material.BLUE_ORCHID);
-		safeOpenBlocks.add(Material.ALLIUM);
-		safeOpenBlocks.add(Material.AZURE_BLUET);
-		safeOpenBlocks.add(Material.RED_TULIP);
-		safeOpenBlocks.add(Material.ORANGE_TULIP);
-		safeOpenBlocks.add(Material.WHITE_TULIP);
-		safeOpenBlocks.add(Material.PINK_TULIP);
-		safeOpenBlocks.add(Material.OXEYE_DAISY);
+		safeOpenBlocks.add(Material.YELLOW_FLOWER);
+		safeOpenBlocks.add(Material.RED_ROSE);
+		safeOpenBlocks.add(Material.LONG_GRASS);
 		safeOpenBlocks.add(Material.BROWN_MUSHROOM);
 		safeOpenBlocks.add(Material.RED_MUSHROOM);
 		safeOpenBlocks.add(Material.TORCH);
-		safeOpenBlocks.add(Material.WALL_TORCH);
+		safeOpenBlocks.add(Material.TORCH);
 		safeOpenBlocks.add(Material.REDSTONE_WIRE);
 		safeOpenBlocks.add(Material.WHEAT);
 		safeOpenBlocks.add(Material.LADDER);
 		safeOpenBlocks.add(Material.LEVER);
-		safeOpenBlocks.add(Material.LIGHT_WEIGHTED_PRESSURE_PLATE);
-		safeOpenBlocks.add(Material.HEAVY_WEIGHTED_PRESSURE_PLATE);
-		safeOpenBlocks.add(Material.STONE_PRESSURE_PLATE);
-		safeOpenBlocks.add(Material.OAK_PRESSURE_PLATE);
-		safeOpenBlocks.add(Material.SPRUCE_PRESSURE_PLATE);
-		safeOpenBlocks.add(Material.BIRCH_PRESSURE_PLATE);
-		safeOpenBlocks.add(Material.JUNGLE_PRESSURE_PLATE);
-		safeOpenBlocks.add(Material.ACACIA_PRESSURE_PLATE);
-		safeOpenBlocks.add(Material.DARK_OAK_PRESSURE_PLATE);
-		safeOpenBlocks.add(Material.REDSTONE_TORCH);
-		safeOpenBlocks.add(Material.REDSTONE_WALL_TORCH);
+		safeOpenBlocks.add(Material.GOLD_PLATE);
+		safeOpenBlocks.add(Material.IRON_PLATE);
+		safeOpenBlocks.add(Material.STONE_PLATE);
+		safeOpenBlocks.add(Material.WOOD_PLATE);
+		safeOpenBlocks.add(Material.REDSTONE_TORCH_OFF);
+		safeOpenBlocks.add(Material.REDSTONE_TORCH_ON);
 		safeOpenBlocks.add(Material.STONE_BUTTON);
 		safeOpenBlocks.add(Material.SNOW);
 		safeOpenBlocks.add(Material.SUGAR_CANE);
-		safeOpenBlocks.add(Material.REPEATER);
-		safeOpenBlocks.add(Material.COMPARATOR);
-		safeOpenBlocks.add(Material.OAK_TRAPDOOR);
-		safeOpenBlocks.add(Material.SPRUCE_TRAPDOOR);
-		safeOpenBlocks.add(Material.BIRCH_TRAPDOOR);
-		safeOpenBlocks.add(Material.JUNGLE_TRAPDOOR);
-		safeOpenBlocks.add(Material.ACACIA_TRAPDOOR);
-		safeOpenBlocks.add(Material.DARK_OAK_TRAPDOOR);
+		safeOpenBlocks.add(Material.DIODE_BLOCK_OFF);
+		safeOpenBlocks.add(Material.DIODE_BLOCK_ON);
+		safeOpenBlocks.add(Material.REDSTONE_COMPARATOR_OFF);
+		safeOpenBlocks.add(Material.REDSTONE_COMPARATOR_ON);
+		safeOpenBlocks.add(Material.TRAP_DOOR);
+		safeOpenBlocks.add(Material.IRON_TRAPDOOR);
 		safeOpenBlocks.add(Material.MELON_STEM);
-		safeOpenBlocks.add(Material.ATTACHED_MELON_STEM);
 		safeOpenBlocks.add(Material.PUMPKIN_STEM);
-		safeOpenBlocks.add(Material.ATTACHED_PUMPKIN_STEM);
 		safeOpenBlocks.add(Material.VINE);
-		safeOpenBlocks.add(Material.NETHER_WART);
+		safeOpenBlocks.add(Material.NETHER_WARTS);
 		safeOpenBlocks.add(Material.TRIPWIRE);
 		safeOpenBlocks.add(Material.TRIPWIRE_HOOK);
-		safeOpenBlocks.add(Material.CARROTS);
-		safeOpenBlocks.add(Material.POTATOES);
-		safeOpenBlocks.add(Material.OAK_BUTTON);
-		safeOpenBlocks.add(Material.SPRUCE_BUTTON);
-		safeOpenBlocks.add(Material.BIRCH_BUTTON);
-		safeOpenBlocks.add(Material.JUNGLE_BUTTON);
-		safeOpenBlocks.add(Material.ACACIA_BUTTON);
-		safeOpenBlocks.add(Material.DARK_OAK_BUTTON);
-		safeOpenBlocks.add(Material.SUNFLOWER);
-		safeOpenBlocks.add(Material.LILAC);
-		safeOpenBlocks.add(Material.ROSE_BUSH);
-		safeOpenBlocks.add(Material.PEONY);
-		safeOpenBlocks.add(Material.TALL_GRASS);
-		safeOpenBlocks.add(Material.LARGE_FERN);
-		safeOpenBlocks.add(Material.BEETROOTS);
-		try
-		{	// signs in 1.14 can be different wood types
-			safeOpenBlocks.add(Material.ACACIA_SIGN);
-			safeOpenBlocks.add(Material.ACACIA_WALL_SIGN);
-			safeOpenBlocks.add(Material.BIRCH_SIGN);
-			safeOpenBlocks.add(Material.BIRCH_WALL_SIGN);
-			safeOpenBlocks.add(Material.DARK_OAK_SIGN);
-			safeOpenBlocks.add(Material.DARK_OAK_WALL_SIGN);
-			safeOpenBlocks.add(Material.JUNGLE_SIGN);
-			safeOpenBlocks.add(Material.JUNGLE_WALL_SIGN);
-			safeOpenBlocks.add(Material.OAK_SIGN);
-			safeOpenBlocks.add(Material.OAK_WALL_SIGN);
-			safeOpenBlocks.add(Material.SPRUCE_SIGN);
-			safeOpenBlocks.add(Material.SPRUCE_WALL_SIGN);
-		}
-		catch (NoSuchFieldError ex) {}
+		safeOpenBlocks.add(Material.CARROT);
+		safeOpenBlocks.add(Material.POTATO);
+		safeOpenBlocks.add(Material.WOOD_BUTTON);
+		safeOpenBlocks.add(Material.STONE_BUTTON);
+		safeOpenBlocks.add(Material.BEETROOT_BLOCK);
+		safeOpenBlocks.add(Material.SIGN_POST);
+		safeOpenBlocks.add(Material.WALL_SIGN);
 	}
 
 	//these material IDs are ones we don't want to drop the player onto, like cactus or lava or fire or activated Ender portal
@@ -399,8 +352,8 @@ public class BorderData
 		painfulBlocks.add(Material.LAVA);
 		painfulBlocks.add(Material.FIRE);
 		painfulBlocks.add(Material.CACTUS);
-		painfulBlocks.add(Material.END_PORTAL);
-		painfulBlocks.add(Material.MAGMA_BLOCK);
+		painfulBlocks.add(Material.ENDER_PORTAL);
+		painfulBlocks.add(Material.MAGMA);
 	}
 
 	// check if a particular spot consists of 2 breathable blocks over something relatively solid
