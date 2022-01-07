@@ -47,10 +47,6 @@ public class Config
 	private static int timerTicks = 4;
 	private static boolean whooshEffect = true;
 	private static boolean portalRedirection = true;
-	private static boolean dynmapEnable = true;
-	private static String dynmapMessage;
-	private static int dynmapPriority = 0;
-	private static boolean dynmapHideByDefault = false;
 	private static int remountDelayTicks = 0;
 	private static boolean killPlayer = false;
 	private static boolean denyEnderpearl = false;
@@ -74,7 +70,6 @@ public class Config
 		if (logIt)
 			log("Border set. " + BorderDescription(world));
 		save(true);
-		DynMapFeatures.showBorder(world, border);
 	}
 	public static void setBorder(String world, BorderData border)
 	{
@@ -134,7 +129,6 @@ public class Config
 		borders.remove(world);
 		log("Removed border for world \"" + world + "\".");
 		save(true);
-		DynMapFeatures.removeBorder(world);
 	}
 
 	public static void removeAllBorders()
@@ -142,7 +136,6 @@ public class Config
 		borders.clear();
 		log("Removed all borders for all worlds.");
 		save(true);
-		DynMapFeatures.removeAllBorders();
 	}
 
 	public static String BorderDescription(String world)
@@ -207,7 +200,6 @@ public class Config
 		shapeRound = round;
 		log("Set default border shape to " + (ShapeName()) + ".");
 		save(true);
-		DynMapFeatures.showAllBorders();
 	}
 
 	public static boolean ShapeRound()
@@ -382,42 +374,6 @@ public class Config
 		return fillAutosaveFrequency;
 	}
 
-
-	public static void setDynmapBorderEnabled(boolean enable)
-	{
-		dynmapEnable = enable;
-		log("DynMap border display is now " + (enable ? "enabled" : "disabled") + ".");
-		save(true);
-		DynMapFeatures.showAllBorders();
-	}
-
-	public static boolean DynmapBorderEnabled()
-	{
-		return dynmapEnable;
-	}
-
-	public static void setDynmapMessage(String msg)
-	{
-		dynmapMessage = msg;
-		log("DynMap border label is now set to: " + msg);
-		save(true);
-		DynMapFeatures.showAllBorders();
-	}
-
-	public static String DynmapMessage()
-	{
-		return dynmapMessage;
-	}
-
-	public static boolean DynmapHideByDefault()
-	{
-		return dynmapHideByDefault;
-	}
-
-	public static int DynmapPriority()
-	{
-		return dynmapPriority;
-	}
 
 	public static void setPlayerBypass(UUID player, boolean bypass)
 	{
@@ -607,10 +563,6 @@ public class Config
 		knockBack = cfg.getDouble("knock-back-dist", 3.0);
 		timerTicks = cfg.getInt("timer-delay-ticks", 5);
 		remountDelayTicks = cfg.getInt("remount-delay-ticks", 0);
-		dynmapEnable = cfg.getBoolean("dynmap-border-enabled", true);
-		dynmapMessage = cfg.getString("dynmap-border-message", "The border of the world.");
-		dynmapHideByDefault = cfg.getBoolean("dynmap-border-hideByDefault", false);
-		dynmapPriority = cfg.getInt("dynmap-border-priority", 0);
 		logConfig("Using " + (ShapeName()) + " border, knockback of " + knockBack + " blocks, and timer delay of " + timerTicks + ".");
 		killPlayer = cfg.getBoolean("player-killed-bad-spawn", false);
 		denyEnderpearl = cfg.getBoolean("deny-enderpearl", true);
@@ -718,10 +670,6 @@ public class Config
 		cfg.set("knock-back-dist", knockBack);
 		cfg.set("timer-delay-ticks", timerTicks);
 		cfg.set("remount-delay-ticks", remountDelayTicks);
-		cfg.set("dynmap-border-enabled", dynmapEnable);
-		cfg.set("dynmap-border-message", dynmapMessage);
-		cfg.set("dynmap-border-hideByDefault", dynmapHideByDefault);
-		cfg.set("dynmap-border-priority", dynmapPriority);
 		cfg.set("player-killed-bad-spawn", killPlayer);
 		cfg.set("deny-enderpearl", denyEnderpearl);
 		cfg.set("fill-autosave-frequency", fillAutosaveFrequency);
