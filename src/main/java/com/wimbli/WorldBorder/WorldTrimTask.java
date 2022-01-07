@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -26,7 +27,7 @@ public class WorldTrimTask implements Runnable
 	private transient boolean readyToGo = false;
 	private transient boolean paused = false;
 	private transient int taskID = -1;
-	private transient Player notifyPlayer = null;
+	private transient UUID notifyPlayerUuid = null;
 	private transient int chunksPerRun = 1;
 	
 	// values for what chunk in the current region we're at
@@ -49,7 +50,7 @@ public class WorldTrimTask implements Runnable
 	public WorldTrimTask(Server theServer, Player player, String worldName, int trimDistance, int chunksPerRun)
 	{
 		this.server = theServer;
-		this.notifyPlayer = player;
+		if (player != null) this.notifyPlayerUuid = player.getUniqueId();
 		this.chunksPerRun = chunksPerRun;
 
 		this.world = server.getWorld(worldName);
@@ -74,7 +75,7 @@ public class WorldTrimTask implements Runnable
 		this.border.setRadiusX(border.getRadiusX() + trimDistance);
 		this.border.setRadiusZ(border.getRadiusZ() + trimDistance);
 
-		worldData = WorldFileData.create(world, notifyPlayer);
+		worldData = WorldFileData.create(world, player);
 		if (worldData == null)
 		{
 			this.stop();
@@ -393,8 +394,10 @@ public class WorldTrimTask implements Runnable
 	private void sendMessage(String text)
 	{
 		Config.log("[Trim] " + text);
-		if (notifyPlayer != null)
-			notifyPlayer.sendMessage("[Trim] " + text);
+		if (notifyPlayerUuid != null) {
+			Player player = Bukkit.getPlayer(notifyPlayerUuid);
+			if (player != null) player.sendMessage("[Trim] " + text);
+		}
 	}
 	
 	/**

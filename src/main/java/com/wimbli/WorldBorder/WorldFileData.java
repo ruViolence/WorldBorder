@@ -9,12 +9,14 @@ import java.nio.IntBuffer;
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.World;
 
 // image output stuff, for debugging method at bottom of this file
 import java.awt.*;
 import java.awt.image.*;
+import java.util.UUID;
 import javax.imageio.*;
 
 
@@ -25,7 +27,7 @@ public class WorldFileData
 	private transient World world;
 	private transient File regionFolder = null;
 	private transient File[] regionFiles = null;
-	private transient Player notifyPlayer = null;
+	private transient UUID notifyPlayerUuid = null;
 	private transient Map<CoordXZ, List<Boolean>> regionChunkExistence = Collections.synchronizedMap(new HashMap<CoordXZ, List<Boolean>>());
 
 	// Use this static method to create a new instance of this class. If null is returned, there was a problem so any process relying on this should be cancelled.
@@ -73,7 +75,7 @@ public class WorldFileData
 	private WorldFileData(World world, Player notifyPlayer)
 	{
 		this.world = world;
-		this.notifyPlayer = notifyPlayer;
+		if (notifyPlayer != null) this.notifyPlayerUuid = notifyPlayer.getUniqueId();
 	}
 
 
@@ -241,8 +243,10 @@ public class WorldFileData
 	private void sendMessage(String text)
 	{
 		Config.log("[WorldData] " + text);
-		if (notifyPlayer != null && notifyPlayer.isOnline())
-			notifyPlayer.sendMessage("[WorldData] " + text);
+		if (notifyPlayerUuid != null) {
+			Player player = Bukkit.getPlayer(notifyPlayerUuid);
+			if (player != null) player.sendMessage("[WorldData] " + text);
+		}
 	}
 
 	// file filter used for region files
