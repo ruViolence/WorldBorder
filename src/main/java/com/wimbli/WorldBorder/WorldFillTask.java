@@ -23,7 +23,6 @@ public class WorldFillTask implements Runnable
 	private transient Server server = null;
 	private transient World world = null;
 	private transient BorderData border = null;
-	private transient WorldFileData worldData = null;
 	private transient boolean readyToGo = false;
 	private transient boolean paused = false;
 	private transient boolean pausedForMemory = false;
@@ -131,14 +130,6 @@ public class WorldFillTask implements Runnable
 			return;
 		}
 
-		// load up a new WorldFileData for the world in question, used to scan region files for which chunks are already fully generated and such
-		worldData = WorldFileData.create(world, player);
-		if (worldData == null)
-		{
-			this.stop();
-			return;
-		}
-		
 		pendingChunks = new HashMap<>();
 		preventUnload = new HashSet<>();
 
@@ -217,7 +208,6 @@ public class WorldFillTask implements Runnable
 				// If cf.get() returned the chunk reliably, pendingChunks could
 				// be a set and we wouldn't have to map CFs to coords ...
 				CoordXZ xz = pendingChunks.get(cf);
-				worldData.chunkExistsNow(xz.x, xz.z);
 				chunksToUnload.add(xz);
 			}
 			else
@@ -230,7 +220,7 @@ public class WorldFillTask implements Runnable
 		Set<UnloadDependency> newPreventUnload = new HashSet<>();
 		for (UnloadDependency dependency : preventUnload) 
 		{
-			if (worldData.doesChunkExist(dependency.forX, dependency.forZ)) 
+			if (world.isChunkGenerated(dependency.forX, dependency.forZ)) 
 				chunksToUnload.add(new CoordXZ(dependency.neededX, dependency.neededZ));
 			else
 				newPreventUnload.add(dependency);
@@ -298,7 +288,7 @@ public class WorldFillTask implements Runnable
 			{
 				// skip past any chunks which are confirmed as fully generated using our super-special isChunkFullyGenerated routine
 				int rLoop = 0;
-				while (worldData.isChunkFullyGenerated(x, z))
+				while (isChunkFullyGenerated(x, z))
 				{
 					rLoop++;
 					insideBorder = true;
@@ -636,5 +626,21 @@ public class WorldFillTask implements Runnable
 		}
 
 		return future.thenAccept( (Chunk chunk) -> {});
+	}
+
+	// Find out if the chunk at the given coordinates has been fully generated.
+	// Minecraft only fully generates a chunk when adjacent chunks are also loaded.
+	public boolean isChunkFullyGenerated(int x, int z)
+	{	// if all adjacent chunks exist, it should be a safe enough bet that this one is fully generated
+		// For 1.13+, due to world gen changes, this is now effectively a 3 chunk radius requirement vs a 1 chunk radius
+		for (int xx = x-3; xx <= x+3; xx++)
+		{
+			for (int zz = z-3; zz <= z+3; zz++)
+			{
+				if (!world.isChunkGenerated(xx, zz))
+					return false;
+			}
+		}
+		return true;
 	}
 }

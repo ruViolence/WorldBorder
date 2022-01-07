@@ -300,7 +300,7 @@ public class WorldTrimTask implements Runnable
 			for (CoordXZ wipe : trimChunks)
 			{
 				// if the chunk pointer is empty (chunk doesn't technically exist), no need to wipe the already empty pointer
-				if (!worldData.doesChunkExist(wipe.x, wipe.z))
+				if (!world.isChunkGenerated(wipe.x, wipe.z))
 					continue;
 
 				// wipe this extraneous chunk's pointer... note that this method isn't perfect since the actual chunk data is left orphaned,
